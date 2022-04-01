@@ -14,7 +14,10 @@ module.exports = {
       current: 'currentColor',
       'white': '#f2f2f2',
       'black': '#090C14',
-      'gray': '#13161F',
+      'abu-muda': '#13161F',
+      'abu-tua': '#090c14',
+      'oranye-muda': '#F9A136',
+      'oranye-tua': '#EF8F1C',
     },
     fontFamily: {
       sans: ['Titillium Web', 'sans-serif'],
