@@ -13,8 +13,19 @@
     </div>
     <div class="splitter bg-cover bg-no-repeat bg-bottom" />
   </div>
-  <div>
-    <!--  -->
+  <div class="px-8 mt-10">
+    <h1 class="ds leading-relaxed text-oranye-muda uppercase text-2xl text-center mb-5 font-semibold">OVERVIEW</h1>
+    <div class="grid grid-cols-12 gap-5">
+      <div class="relative col-span-7 p-5">
+        <h2 class="text-xl font-semibold leading-loose">Visualisasi Keuangan Mingguan</h2>
+        <apexchart width="100%" height="300" type="line" :options="options" :series="series"></apexchart>
+      </div>
+      <div class="col-span-5">
+        <h2 class="text-center mb-5 text-xl font-semibold leading-loose">Visualisasi Keuangan Mingguan</h2>
+        <apexchart width="100%" height="300" type="donut" :options="options2" :series="series2"></apexchart>
+      </div>
+      <!--  -->
+    </div>
   </div>
 </template>
 
@@ -24,6 +35,152 @@ import MiniBanner from "@/components/miniBanner.vue"
 export default {
   components: {
     MiniBanner
+  },
+  methods: {
+    getLastWeek(num) {
+      const namaBulan = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agt", "Sep", "Okt", "Nov", "Des"];
+
+      const today = new Date()
+      var lastWeek = new Date(today.getFullYear(), today.getMonth(), today.getDate() - (7 * num));
+      return lastWeek.getUTCDate().toString() + ", " + namaBulan[lastWeek.getMonth()];
+    },
+    getKemarin(num) {
+      const today = new Date()
+      let x = new Date(today.getFullYear(), today.getMonth(), today.getDate() - num);
+      return x;
+    },
+    dateMonth(num) {
+      const namaHari = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+      return namaHari[this.getKemarin(num).getDay()] + " (" + this.getKemarin(num).getDate() + "/" + (this.getKemarin(num).getMonth() + 1) + ")";
+    }
+  },
+  data: function () {
+
+    return {
+      options: {
+        chart: {
+          type: 'line',
+          zoom: {
+            enabled: false
+          },
+          height: 300,
+        },
+        yaxis: {
+          labels: {
+            formatter: function (v) {
+              var x = v / 1000;
+              if (x < 1000000)
+                return x + ' RB';
+              else if (x >= 1000000 && x < 1000000000)
+                return x + ' JT';
+              else if (x >= 1000000000)
+                return x + ' M';
+            }
+          }
+        },
+        xaxis: {
+          categories: [
+            this.getLastWeek(5),
+            this.getLastWeek(4),
+            this.getLastWeek(3),
+            this.getLastWeek(2),
+            this.getLastWeek(1)
+          ]
+        },
+        tooltip: {
+          enabled: true
+        },
+        stroke: {
+          curve: 'smooth',
+          colors: [
+            '#090c14'
+          ]
+        }
+      },
+      series: [{
+        name: 'Saldo',
+        data: [
+          25000,
+          200000,
+          120000,
+          50000,
+          90000
+        ]
+      }],
+      options2: {
+        labels: ["Pemasukan", "Pengeluaran"],
+        colors: ['#00bc50', '#FF4560'],
+        plotOptions: {
+          pie: {
+            donut: {
+              labels: {
+                show: true,
+                name: {
+                  show: true,
+                },
+                value: {
+                  show: true,
+                  formatter: function (value) {
+                    if (value < 1000000) {
+                      var x = value / 1000;
+                      return x + ' RB';
+                    }
+                    else if (value >= 1000000 && value < 1000000000) {
+                      var x = value / 1000000;
+                      return x + ' JT';
+                    }
+                    else if (value >= 1000000000) {
+                      var x = value / 1000000000;
+                      return x + ' M';
+                    }
+                  }
+                }
+              },
+            }
+          }
+        },
+        legend: {
+          show: false
+        },
+        dataLabels: {
+          enabled: true,
+        },
+
+        stroke: {
+          show: true,
+          width: 1,
+          colors: ['#fff']
+        },
+        xaxis: {
+          categories: [
+            this.dateMonth(1),
+            this.dateMonth(2),
+            this.dateMonth(3),
+            this.dateMonth(4),
+            this.dateMonth(5),
+            this.dateMonth(6),
+            this.dateMonth(7)
+          ],
+          labels: {
+            formatter: function (value) {
+              if (value < 1000000) {
+                var x = value / 1000;
+                return x + ' RB';
+              }
+              else if (value >= 1000000 && value < 1000000000) {
+                var x = value / 1000000;
+                return x + ' JT';
+              }
+              else if (value >= 1000000000) {
+                var x = value / 1000000000;
+                return x + ' M';
+              }
+            },
+          }
+        },
+      },
+      series2:  [2000000, 5000000],
+    }
   }
 }
 </script>

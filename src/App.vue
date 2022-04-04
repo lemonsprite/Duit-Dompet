@@ -4,7 +4,7 @@
       <div class="fixed md:left-0 md:top-0  bottom-0 md:h-full md:w-16 h-16 w-full shadow-lg bg-abu-tua truncate z-10 text-white rounded-t-3xl md:rounded-none">
         <div class="logo p-5 h-16 cursor-pointer hidden md:block">
           <router-link :to="{ name: 'home' }">
-            <img src="@/assets/logo-light.png" class="block h-full w-full cursor-pointer" />
+            <img src="@/assets/logo-light.svg" class="block h-full w-full cursor-pointer antialiased" />
           </router-link>
         </div>
         <div id="menu">
@@ -20,7 +20,7 @@
       
     </div>
     <div id="konten" class="md:ml-16 ml-0 mb-16">
-      <div id="navbar" class="h-16 bg-abu-tua shadow-lg px-8 flex items-center text-white justify-between">
+      <div id="navbar" class="h-16 bg-abu-tua shadow-lg px-8 flex items-center text-white justify-between sticky top-0 z-50">
         <router-link :to="{ name: 'home' }">
           <h1 id="brand" class="capitalize italic text-2xl tracking-widest font-semibold">DUIT DOMPET</h1>
         </router-link>
@@ -34,7 +34,8 @@
           </div>
         </div>
       </div>
-      <div id="main-konten" class="w-full">
+      <div id="main-konten" class="w-full relative">
+        <FloatButton />
         <router-view />
       </div>
     </div>
@@ -42,9 +43,11 @@
 </template>
 <script>
 import MenuItem from "@/components/menuItem.vue"
+import FloatButton from "@/components/floatButton.vue"
 export default {
   components: {
-    MenuItem
+    MenuItem,
+    FloatButton
   }
 
 }
