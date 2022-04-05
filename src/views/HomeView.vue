@@ -15,12 +15,12 @@
   </div>
   <div class="px-8 mt-10">
     <h1 class="ds leading-relaxed text-oranye-muda uppercase text-2xl text-center mb-5 font-semibold">OVERVIEW</h1>
-    <div class="grid grid-cols-12 gap-5">
-      <div class="relative col-span-7 p-5">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+      <div class="relative md:col-span-7 p-5">
         <h2 class="text-xl font-semibold leading-loose">Visualisasi Keuangan Mingguan</h2>
         <apexchart width="100%" height="300" type="line" :options="options" :series="series"></apexchart>
       </div>
-      <div class="col-span-5">
+      <div class="md:col-span-5 mb-20 md:mb-0">
         <h2 class="text-center mb-5 text-xl font-semibold leading-loose">Visualisasi Keuangan Mingguan</h2>
         <apexchart width="100%" height="300" type="donut" :options="options2" :series="series2"></apexchart>
       </div>

@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper antialiased">
     <div id="navigation">
-      <div class="fixed md:left-0 md:top-0  bottom-0 md:h-full md:w-16 h-16 w-full shadow-lg bg-abu-tua truncate z-10 text-white rounded-t-3xl md:rounded-none">
+      <div class="fixed md:left-0 md:top-0 bottom-0 md:h-full md:w-16 h-16 w-full shadow-lg bg-abu-tua truncate z-10 text-white rounded-t-3xl md:rounded-none">
         <div class="logo p-5 h-16 cursor-pointer hidden md:block">
           <router-link :to="{ name: 'home' }">
             <img src="@/assets/logo-light.svg" class="block h-full w-full cursor-pointer antialiased" />
@@ -17,9 +17,8 @@
           </ul>
         </div>
       </div>
-      
     </div>
-    <div id="konten" class="md:ml-16 ml-0 mb-16">
+    <div id="konten" class="md:ml-16 ml-0 mb-16 relative">
       <div id="navbar" class="h-16 bg-abu-tua shadow-lg px-8 flex items-center text-white justify-between sticky top-0 z-50">
         <router-link :to="{ name: 'home' }">
           <h1 id="brand" class="capitalize italic text-2xl tracking-widest font-semibold">DUIT DOMPET</h1>
@@ -34,8 +33,8 @@
           </div>
         </div>
       </div>
+      <FloatButton />
       <div id="main-konten" class="w-full relative">
-        <FloatButton />
         <router-view />
       </div>
     </div>
@@ -56,5 +55,4 @@ export default {
 #menu {
   height: calc(100% - 5rem);
 }
-
 </style>
